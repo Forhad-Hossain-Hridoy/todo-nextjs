@@ -3,11 +3,13 @@
 import { MdOutlineEdit } from "react-icons/md";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import NotFound from "../not-found";
 
 export default function DetailPage({ params }) {
   const { id } = params;
-  const [note, setNote] = useState(null);
+  const [note, setNote] = useState();
   const noteId = note?.id ;
+
 
   useEffect(() => {
     const lsData = localStorage.getItem("noteList");
@@ -21,6 +23,8 @@ export default function DetailPage({ params }) {
       }
     }
   }, []);
+
+  if(!note) return <NotFound />
 
   return (
     <div className="w-full h-screen max-w-[1000px] mx-auto bg-[#A5C9CA] p-[10px] ">
